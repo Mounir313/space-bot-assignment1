@@ -77,6 +77,26 @@ def get_iss_location(timeout: int = 5) -> dict:
     human_time = datetime.datetime.fromtimestamp(ts)
     return {"lat": float(lat), "lon": float(lon), "ts": ts, "human": human_time}
 
+def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
+    key = os.getenv("LOCATIONIQ_KEY")
+    if not key:
+        raise ValueError("LOCATIONIQ_KEY missing in .env")
+    url = f"{LOCATIONIQ_BASE}/reverse"
+    params = {"key": key, "lat": lat, "lon": lon, "format": "json"}
+    r = requests.get(url, params=params, timeout=8)
+    ensure_ok(r)
+    data = r.json()
+    addr = data.get("address", {})
+    return {
+        "road": addr.get("road"),
+        "city": addr.get("city") or addr.get("town") or addr.get("village"),
+        "state": addr.get("state"),
+        "country": addr.get("country"),
+        "code": addr.get("country_code"),
+        "display": data.get("display_name"),
+    }
+
+
 
 
 
