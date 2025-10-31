@@ -39,6 +39,17 @@ def list_rooms(access_token: str) -> list[dict]:
         print(f"Type: '{room.get('type')}' Name: {room.get('title')}")
     return rooms
 
+def pick_room(rooms: list[dict]) -> dict:
+    query = input("Which room should be monitored for /seconds messages? ").strip()
+    matches = [r for r in rooms if query.lower() in (r.get("title") or "").lower()]
+    if not matches:
+        raise ValueError(f"No rooms found with the word {query}")
+    print(f"Found rooms with the word {query}")
+    chosen = matches[0]
+    print(f"Found room : {chosen.get('title')}")
+    return chosen
+
+
 
 if __name__ == "__main__":
     token = get_token()
