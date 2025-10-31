@@ -29,6 +29,17 @@ def ensure_ok(r: requests.Response) -> None:
     if r.status_code != 200:
         raise Exception(f"Bad status {r.status_code}: {r.text}")
 
+def list_rooms(access_token: str) -> list[dict]:
+    url = f"{WEBEX_BASE}/rooms"
+    r = requests.get(url, headers=webex_headers(access_token))
+    ensure_ok(r)
+    rooms = r.json().get("items", [])
+    print("List of rooms:")
+    for room in rooms:
+        print(f"Type: '{room.get('type')}' Name: {room.get('title')}")
+    return rooms
+
+
 if __name__ == "__main__":
     token = get_token()
     print("Token loaded.")
