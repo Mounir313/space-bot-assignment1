@@ -49,6 +49,25 @@ def pick_room(rooms: list[dict]) -> dict:
     print(f"Found room : {chosen.get('title')}")
     return chosen
 
+def get_latest_message(access_token: str, room_id: str) -> Optional[str]:
+    url = f"{WEBEX_BASE}/messages"
+    params = {"roomId": room_id, "max": 1}
+    r = requests.get(url, headers=webex_headers(access_token), params=params)
+    ensure_ok(r)
+    items = r.json().get("items", [])
+    if not items:
+        return None
+    return items[0].get("text")
+
+def parse_seconds(msg: str) -> Optional[int]:
+    if not msg:
+        return None
+    msg = msg.strip()
+    if msg.startswith("/") and msg[1:].isdigit():
+        return int(msg[1:])
+    return None
+
+
 
 
 if __name__ == "__main__":
