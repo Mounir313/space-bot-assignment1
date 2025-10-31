@@ -67,6 +67,17 @@ def parse_seconds(msg: str) -> Optional[int]:
         return int(msg[1:])
     return None
 
+def get_iss_location(timeout: int = 5) -> dict:
+    r = requests.get(ISS_URL, timeout=timeout)
+    ensure_ok(r)
+    data = r.json()
+    lat = data["iss_position"]["latitude"]
+    lon = data["iss_position"]["longitude"]
+    ts = data["timestamp"]
+    human_time = datetime.datetime.fromtimestamp(ts)
+    return {"lat": float(lat), "lon": float(lon), "ts": ts, "human": human_time}
+
+
 
 
 
