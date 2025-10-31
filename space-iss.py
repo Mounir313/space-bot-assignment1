@@ -97,6 +97,20 @@ def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
     }
 
 
+def format_location_message(human: datetime.datetime, lat: float, lon: float, geo: Dict[str, Any]) -> str:
+    time_str = human.ctime()
+    parts = []
+    if geo.get("city"): parts.append(geo["city"])
+    if geo.get("state"): parts.append(geo["state"])
+    if geo.get("country"): parts.append(geo["country"])
+    location_str = ", ".join(parts) if parts else (geo.get("display") or "an unknown location")
+    return f"On {time_str}, the ISS was flying over {location_str}. ({lat:.4f}°, {lon:.4f}°)"
+
+def post_message(access_token: str, room_id: str, markdown_text: str) -> None:
+    url = f"{WEBEX_BASE}/messages"
+    payload = {"roomId": room_id, "markdown": markdown_text, "text": markdown_text}
+    r = requests.post(url, headers=webex_headers(access_token), data=json.dumps(payload))
+    ensure_ok(r)
 
 
 
