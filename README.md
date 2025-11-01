@@ -13,9 +13,10 @@ This investigation sheet helps you gather key technical information from the thr
 |---------|---------|
 | API Base URL | `https://webexapis.com/v1` |
 | Authentication Method | `HTTP Authorization header: Bearer <access_token>` |
-| Endpoint to list rooms | `_______________________________` |
-| Endpoint to get messages | `_______________________________` |
-| Endpoint to send message | `_______________________________` |
+| Endpoint to list rooms | `GET https://webexapis.com/v1/rooms` |
+| Endpoint to get messages | `https://webexapis.com/v1/messages?roomId=<ROOM_ID>&max=1` |
+| Endpoint to send message | `POST https://webexapis.com/v1/messages
+Body (JSON): { "roomId": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vOGY5Mjc2NDAtYjVkNC0xMWYwLTkyODMtOGRjMTZjNmVlMzVk", "text": "Hello room!" }` |
 | Required headers | `_______________________________` |
 | Sample full GET or POST request | `_______________________________` |
 
