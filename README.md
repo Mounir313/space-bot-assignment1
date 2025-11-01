@@ -32,11 +32,18 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
 
 | Criteria | Details |
 |---------|---------|
-| API Base URL | `_______________________________` |
-| Endpoint for current ISS location | `_______________________________` |
+| API Base URL | `http://api.open-notify.org` |
+| Endpoint for current ISS location | `GET http://api.open-notify.org/iss-now.json` |
 | Sample response format (example JSON) |  
 ```
-
+{
+    "timestamp": 1761970837,
+    "message": "success",
+    "iss_position": {
+        "longitude": "143.8834",
+        "latitude": "-51.3084"
+    }
+}
 ```
 |
 
