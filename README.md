@@ -53,11 +53,11 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
 
 | Criteria | Details |
 |---------|---------|
-| Provider used (circle one) | **LocationIQ / Mapbox/ other -provide detail** |
-| API Base URL | `_______________________________` |
-| Endpoint for reverse geocoding | `_______________________________` |
-| Authentication method | `_______________________________` |
-| Required query parameters | `_______________________________` |
+| Provider used (circle one) | **LocationIQ** |
+| API Base URL | `https://us1.locationiq.com/v1` |
+| Endpoint for reverse geocoding | `GET /reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=-51.3084&lon=143.8834&format=json` |
+| Authentication method | `API key via query parameter `key=pk.4cd3a11fa8de6f0975651fe29b107a8c` |
+| Required query parameters | `key`, `lat`, `lon`, `format=json` |
 | Sample request with latitude/longitude | `_______________________________` |
 | Sample JSON response (formatted example) |  
 ```
