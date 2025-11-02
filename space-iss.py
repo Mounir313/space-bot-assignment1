@@ -117,25 +117,37 @@ def main():
     rooms = list_rooms(access_token)
     chosen = pick_room(rooms)
     room_id = chosen["id"]
-    print("Starting message monitor (Ctrl+C to stop)...")
 
+    print("Starting ISS monitor (Ctrl+C to stop)...")
     last_seen = None
+
     while True:
         try:
             msg = get_latest_message(access_token, room_id)
+
             if msg and msg != last_seen:
                 print(f"Received message: {msg}")
                 last_seen = msg
+
                 secs = parse_seconds(msg)
                 if secs is not None:
-                    wait_for = max(0, min(secs, 300))
+                    wait_for = max(0, min(secs, 300))  
+                    print(f"Waiting {wait_for} seconds...")
                     time.sleep(wait_for)
-                    iss = get_iss_location()
-                    geo = reverse_geocode(iss["lat"], iss["lon"])
-                    response = format_location_message(iss["human"], iss["lat"], iss["lon"], geo)
-                    print("Sending to Webex: " + response)
+
+                    iss_data = get_iss_location()
+                    lat, lon, ts = iss_data["latitude"], iss_data["longitude"], iss_data["timestamp"]
+
+                    human_time = datetime.datetime.fromtimestamp(ts)
+
+                    geo = reverse_geocode(lat, lon)
+
+                    response = format_location_message(human_time, lat, lon, geo)
+                    print(f"Sending to Webex: {response}")
                     post_message(access_token, room_id, response)
+
             time.sleep(1)
+
         except KeyboardInterrupt:
             print("Exiting monitor.")
             break
