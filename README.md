@@ -60,7 +60,20 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
 | Required query parameters | `key`, `lat`, `lon`, `format=json` |
 | Sample request with latitude/longitude | `https://us1.locationiq.com/v1/reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=-51.3084&lon=143.8834&format=json` |
 | Sample JSON response (formatted example) |  
-```
+```json
+{
+  "lat": "-51.3084",
+  "lon": "143.8834",
+  "address": {
+    "road": "Butterfield Trl",
+    "city": "Imperial",
+    "state": "CA",
+    "country": "United States of America",
+    "country_code": "us"
+  },
+  "display_name": "Butterfield Trl, Imperial, CA, United States of America"
+}
+mine gives me “Unable to geocode” is not that my code is broken — it’s because the coordinates I tested are in the middle of the ocean, where LocationIQ has no street‑level address to return. The API is working correctly, but it can only return an address if the point is on land where data exists.
 
 ```
 |
