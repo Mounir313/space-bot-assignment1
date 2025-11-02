@@ -73,7 +73,7 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
   },
   "display_name": "Butterfield Trl, Imperial, CA, United States of America"
 }
-mine gives me “Unable to geocode” is not that my code is broken — it’s because the coordinates I tested are in the middle of the ocean, where LocationIQ has no street‑level address to return. The API is working correctly, but it can only return an address if the point is on land where data exists.
+mine gives me “Unable to geocode” is not that my code is broken — it’s because the coordinates I tested are in the middle of the ocean, where LocationIQ has no street‑level address to return. The API is working correctly, but it can only return an address if the point is on land where data exists. but it should look like the example above.
 
 ```
 |
