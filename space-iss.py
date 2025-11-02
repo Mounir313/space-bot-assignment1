@@ -68,19 +68,15 @@ def parse_seconds(msg: str) -> Optional[int]:
         return int(msg[1:])
     return None
 
-def get_iss_location() -> dict:
-    r = requests.get(ISS_URL, timeout=10)
-    r.raise_for_status()
+def get_iss_location(timeout: int = 5) -> dict:
+    r = requests.get(ISS_URL, timeout=timeout)
+    ensure_ok(r)
     data = r.json()
+    lat = data["iss_position"]["latitude"]
+    lon = data["iss_position"]["longitude"]
     ts = data["timestamp"]
-    lat = float(data["iss_position"]["latitude"])
-    lon = float(data["iss_position"]["longitude"])
-    return {
-        "lat": lat,
-        "lon": lon,
-        "ts": ts,
-        "human": datetime.datetime.fromtimestamp(ts)
-    }
+    human_time = datetime.datetime.fromtimestamp(ts)
+    return {"lat": float(lat), "lon": float(lon), "ts": ts, "human": human_time}
 
 
 def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
