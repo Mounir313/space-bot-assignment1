@@ -67,15 +67,25 @@ def parse_seconds(msg: str) -> Optional[int]:
         return int(msg[1:])
     return None
 
-def get_iss_location(timeout: int = 5) -> dict:
-    r = requests.get(ISS_URL, timeout=timeout)
-    ensure_ok(r)
+
+ISS_URL = "http://api.open-notify.org/iss-now.json"
+
+def get_iss_location() -> dict:
+    r = requests.get(ISS_URL, timeout=10)
+    r.raise_for_status()  
     data = r.json()
-    lat = data["iss_position"]["latitude"]
-    lon = data["iss_position"]["longitude"]
+
     ts = data["timestamp"]
-    human_time = datetime.datetime.fromtimestamp(ts)
-    return {"lat": float(lat), "lon": float(lon), "ts": ts, "human": human_time}
+    lat = float(data["iss_position"]["latitude"])
+    lon = float(data["iss_position"]["longitude"])
+
+    return {
+        "lat": lat,
+        "lon": lon,
+        "ts": ts,
+        "human": datetime.datetime.fromtimestamp(ts)
+    }
+
 
 def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
     key = os.getenv("LOCATIONIQ_KEY")
