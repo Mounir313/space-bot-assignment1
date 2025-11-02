@@ -85,12 +85,15 @@ mine gives me “Unable to geocode” is not that my code is broken — it’s b
 | Criteria | Details |
 |---------|---------|
 | Library used | `datetime` |
-| Function used to convert epoch | `datetime.datetime.fromtimestamp(<epoch>)` |
+| Function used to convert epoch | `datetime.datetime.fromtimestamp(1762051489)` |
 | Sample code to convert timestamp |  
-```  
+```  Epoch: 1762051489
+Human-readable: Sat Nov  2 04:04:49 2025
+ISS Position → Latitude: 49.4976, Longitude: -31.2013
+
 ```
 |
-| Output (human-readable time) | `_______________________________` |
+| Output (human-readable time) | `Sat Nov 2 04:04:49 2025` |
 
 ---
 
