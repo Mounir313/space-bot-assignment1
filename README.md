@@ -107,23 +107,23 @@ ISS Position → Latitude: 49.4976, Longitude: -31.2013
 
 ### 🔁 RESTful API Usage
 
-- 
-- 
-- 
+- **Resources:** Rooms (`/rooms`), messages (`/messages`), ISS location (`/iss-now.json`), reverse geocode (`/reverse`).  
+- **Methods:** GET to retrieve data, POST to create messages.
+- **Representations:** JSON payloads; bot handles status codes (200 OK) and errors (404 not found).
 
 ### 🧠 MVC Pattern in Space Bot
 
 | Component   | Description |
 |------------|-------------|
-| **Model**  |  |
-| **View**   |  |
-| **Controller** |  |
+| **Model**  | Holds data structures and state |
+| **View**   | Presentation layer (what the user sees) |
+| **Controller** | Logic that orchestrates everything |
 
 
 #### Example:
-- Model: 
-- View: 
-- Controller: 
+- Model: data = {'lat': 49.4976, 'lon': -31.2013, 'timestamp': 1762051489}
+- View: Webex client shows: “At Sat Nov 2 04:04:49 2025 `markdown_message = f"On {time_str}, the ISS was flying over {place} ({lat}°, {lon}°)"`
+- Controller: `main()` reads messages, waits seconds, calls `get_iss_location()`, `reverse_geocode()`, and `post_message()`.
 
 ---
 
