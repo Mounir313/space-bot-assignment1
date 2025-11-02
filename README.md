@@ -101,9 +101,9 @@ ISS Position → Latitude: 49.4976, Longitude: -31.2013
 
 ### 🌐 Web Architecture – Client-Server Model
 
-- **Client**: 
-- **Server**: 
-- (Explain the communication between them & include a block diagram )
+- **Client**:  Python bot and Webex client (user side).
+- **Server**:  Webex REST API, ISS API, LocationIQ API. 
+- Client sends HTTP requests (GET/POST) with headers; servers return JSON. Bot parses JSON, transforms data, and posts results back to Webex.
 
 ### 🔁 RESTful API Usage
 
