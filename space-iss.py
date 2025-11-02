@@ -67,8 +67,6 @@ def parse_seconds(msg: str) -> Optional[int]:
         return int(msg[1:])
     return None
 
-ISS_URL = "http://api.open-notify.org/iss-now.json"
-
 def get_iss_location() -> dict:
     r = requests.get(ISS_URL, timeout=10)
     r.raise_for_status()
