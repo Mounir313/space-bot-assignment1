@@ -59,6 +59,7 @@ def get_latest_message(access_token: str, room_id: str) -> Optional[str]:
         return None
     return items[0].get("text")
 
+
 def parse_seconds(msg: str) -> Optional[int]:
     if not msg:
         return None
@@ -70,12 +71,10 @@ def parse_seconds(msg: str) -> Optional[int]:
 def get_iss_location() -> dict:
     r = requests.get(ISS_URL, timeout=10)
     r.raise_for_status()
-    data = r.json()   # store JSON in 'data'
-
+    data = r.json()
     ts = data["timestamp"]
     lat = float(data["iss_position"]["latitude"])
     lon = float(data["iss_position"]["longitude"])
-
     return {
         "lat": lat,
         "lon": lon,
