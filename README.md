@@ -37,11 +37,11 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
 | Sample response format (example JSON) |  
 ```
 {
-    "timestamp": 1761970837,
     "message": "success",
+    "timestamp": 1762051489,
     "iss_position": {
-        "longitude": "143.8834",
-        "latitude": "-51.3084"
+        "longitude": "-31.2013",
+        "latitude": "49.4976"
     }
 }
 ```
@@ -55,15 +55,15 @@ curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/js
 |---------|---------|
 | Provider used (circle one) | **LocationIQ** |
 | API Base URL | `https://us1.locationiq.com/v1` |
-| Endpoint for reverse geocoding | `GET /reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=-51.3084&lon=143.8834&format=json` |
+| Endpoint for reverse geocoding | `GET /reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=49.4976&lon=-31.2013&format=json` |
 | Authentication method | `API key via query parameter `key=pk.4cd3a11fa8de6f0975651fe29b107a8c` |
 | Required query parameters | `key`, `lat`, `lon`, `format=json` |
-| Sample request with latitude/longitude | `https://us1.locationiq.com/v1/reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=-51.3084&lon=143.8834&format=json` |
+| Sample request with latitude/longitude | `https://us1.locationiq.com/v1/reverse?key=pk.4cd3a11fa8de6f0975651fe29b107a8c&lat=49.4976&lon=-31.2013&format=json` |
 | Sample JSON response (formatted example) |  
 ```json
 {
-  "lat": "-51.3084",
-  "lon": "143.8834",
+  "lat": "49.4976",
+  "lon": "-31.2013",
   "address": {
     "road": "Butterfield Trl",
     "city": "Imperial",
@@ -84,8 +84,8 @@ mine gives me “Unable to geocode” is not that my code is broken — it’s b
 
 | Criteria | Details |
 |---------|---------|
-| Library used | `_______________________________` |
-| Function used to convert epoch | `_______________________________` |
+| Library used | `datetime` |
+| Function used to convert epoch | `datetime.datetime.fromtimestamp(<epoch>)` |
 | Sample code to convert timestamp |  
 ```  
 ```
