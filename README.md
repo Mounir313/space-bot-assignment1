@@ -16,7 +16,7 @@ This investigation sheet helps you gather key technical information from the thr
 | Endpoint to list rooms | `GET https://webexapis.com/v1/rooms` |
 | Endpoint to get messages | `https://webexapis.com/v1/messages?roomId=<room_id>&max=1` |
 | Endpoint to send message | `POST https://webexapis.com/v1/messages` |
-Body (JSON): { "roomId": <room_id>, "text": "Hello room!" }` |
+| Body (JSON):  | { "roomId": <room_id>, "text": "Hello room!" }` |
 | Required headers | `Authorization: Bearer <token>` and for POST: `Content-Type: application/json` |
 | Sample full GET or POST request | `Sample full GET (rooms)
 curl -H "Authorization: Bearer <TOKEN>" "https://webexapis.com/v1/rooms"
