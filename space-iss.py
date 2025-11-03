@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+LOCATIONIQ_KEY = os.environ.get("LOCATIONIQ_KEY")
 WEBEX_BASE = "https://webexapis.com/v1"
 ISS_URL = "http://api.open-notify.org/iss-now.json"
 LOCATIONIQ_BASE = "https://us1.locationiq.com/v1"
