@@ -60,14 +60,12 @@ def get_latest_message(access_token: str, room_id: str) -> Optional[str]:
         return None
     return items[0].get("text")
 
-
 def parse_seconds(msg: str) -> Optional[int]:
-    if not msg:
-        return None
     msg = msg.strip()
     if msg.startswith("/") and msg[1:].isdigit():
         return int(msg[1:])
     return None
+
 
 def get_iss_location(timeout: int = 5) -> dict:
     r = requests.get(ISS_URL, timeout=timeout)
