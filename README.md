@@ -122,7 +122,7 @@ ISS Position → Latitude: 49.4976, Longitude: -31.2013
 
 #### Example:
 - Model: data = {'lat': 49.4976, 'lon': -31.2013, 'timestamp': 1762051489}
-- View: Webex client shows: “At Sat Nov 2 04:04:49 2025 `markdown_message = f"On {time_str}, the ISS was flying over {place} ({lat}°, {lon}°)"`
+- View: Webex client shows: “On Mon Nov 03 01:40:53 2025, the ISS was flying over Pedregal, Chiriquí, Panama (8.2570°, -82.3292°). `markdown_message = f"On {time_str}, the ISS was flying over {place} ({lat}°, {lon}°)"`
 - Controller: `main()` reads messages, waits seconds, calls `get_iss_location()`, `reverse_geocode()`, and `post_message()`.
 
 ---
