@@ -104,16 +104,16 @@ def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
         "display": data.get("display_name"),
     }
 
-def format_location_message(time: datetime.datetime, lat: float, lon: float, addr: dict) -> str:
+def format_location_message(time_obj: datetime.datetime, lat: float, lon: float, addr: dict) -> str:
+    time_str = time_obj.strftime('%a %b %d %H:%M:%S %Y')
     if not addr or "address" not in addr:
-        return f"On {time}, the ISS was flying over a body of water at ({lat:.4f}°, {lon:.4f}°)."
-    
+        return f"On {time_str}, the ISS was flying over a body of water at ({lat:.4f}°, {lon:.4f}°)."
     address = addr.get("address", {})
     city = address.get("city") or address.get("town") or address.get("village") or ""
     state = address.get("state", "")
     country = address.get("country", "")
-    
-    return f"On {time}, the ISS was flying over {city}, {state}, {country} ({lat:.4f}°, {lon:.4f}°)."
+    return f"On {time_str}, the ISS was flying over {city}, {state}, {country} ({lat:.4f}°, {lon:.4f}°)."
+
 
 
 def post_message(access_token: str, room_id: str, markdown_text: str) -> None:
