@@ -86,23 +86,16 @@ def get_iss_location(timeout: int = 5) -> dict:
 
 
 def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
-    key = os.getenv("LOCATIONIQ_KEY")
-    if not key:
-        raise ValueError("LOCATIONIQ_KEY missing in .env")
     url = f"{LOCATIONIQ_BASE}/reverse"
-    params = {"key": key, "lat": lat, "lon": lon, "format": "json"}
-    r = requests.get(url, params=params, timeout=8)
-    ensure_ok(r)
+    params = {"key": LOCATIONIQ_KEY, "lat": lat, "lon": lon, "format": "json"}
+    r = requests.get(url, params=params)
+    if r.status_code != 200:
+        return {}  
     data = r.json()
-    addr = data.get("address", {})
-    return {
-        "road": addr.get("road"),
-        "city": addr.get("city") or addr.get("town") or addr.get("village"),
-        "state": addr.get("state"),
-        "country": addr.get("country"),
-        "code": addr.get("country_code"),
-        "display": data.get("display_name"),
-    }
+    if "error" in data:
+        return {}  
+    return data
+
 
 def format_location_message(time_obj: datetime.datetime, lat: float, lon: float, addr: dict) -> str:
     time_str = time_obj.strftime('%a %b %d %H:%M:%S %Y')
