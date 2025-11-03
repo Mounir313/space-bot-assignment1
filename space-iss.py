@@ -41,13 +41,14 @@ def list_rooms(access_token: str) -> list[dict]:
 
 def pick_room(rooms: list[dict]) -> dict:
     query = input("Which room should be monitored for /seconds messages? ").strip()
-    matches = [r for r in rooms if query.lower() in (r.get("title") or "").lower()]
+    matches = [room for room in rooms if query.lower() in room.get("title", "").lower()]
     if not matches:
-        raise ValueError(f"No rooms found with the word {query}")
-    print(f"Found rooms with the word {query}")
-    chosen = matches[0]
-    print(f"Found room : {chosen.get('title')}")
-    return chosen
+        raise ValueError(f"No room found with '{query}' in the title")
+    print(f"Found rooms with the word {query}:")
+    for room in matches:
+        print(room.get("title"))
+    return matches[0]
+
 
 def get_latest_message(access_token: str, room_id: str) -> Optional[str]:
     url = f"{WEBEX_BASE}/messages"
