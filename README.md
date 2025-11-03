@@ -23,7 +23,7 @@ curl -H "Authorization: Bearer <TOKEN>" "https://webexapis.com/v1/rooms"
 
 Sample POST (send message)
 curl -X POST -H "Authorization: Bearer <TOKEN>" -H "Content-Type: application/json" \
-  -d '{"roomId":"Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vOGY5Mjc2NDAtYjVkNC0xMWYwLTkyODMtOGRjMTZjNmVlMzVk","text":"Hello room!"}' \
+  -d '{"roomId":<room_id>,"text":"Hello room!"}' \
   "https://webexapis.com/v1/messages"` |
 
 ---
