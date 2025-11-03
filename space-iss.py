@@ -116,8 +116,6 @@ def post_message(access_token: str, room_id: str, markdown_text: str) -> None:
     r = requests.post(url, headers=webex_headers(access_token), data=json.dumps(payload))
     ensure_ok(r)
 
-import time
-import datetime
 
 def main():
     access_token = get_token()
