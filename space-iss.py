@@ -71,11 +71,18 @@ def get_iss_location(timeout: int = 5) -> dict:
     r = requests.get(ISS_URL, timeout=timeout)
     ensure_ok(r)
     data = r.json()
-    lat = data["iss_position"]["latitude"]
-    lon = data["iss_position"]["longitude"]
-    ts = data["timestamp"]
-    human_time = datetime.datetime.fromtimestamp(ts)
-    return {"lat": float(lat), "lon": float(lon), "ts": ts, "human": human_time}
+    position = data["iss_position"]
+    lon = float(position["longitude"])
+    lat = float(position["latitude"])
+    epoch_time = data["timestamp"]
+    human_time = datetime.datetime.fromtimestamp(epoch_time)
+    return {
+        "lat": lat,
+        "lon": lon,
+        "timestamp": epoch_time,   
+        "ts_human": human_time     
+    }
+
 
 
 def reverse_geocode(lat: float, lon: float) -> Dict[str, Any]:
